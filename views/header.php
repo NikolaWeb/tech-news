@@ -29,9 +29,9 @@ include "php/setup.php";
 
                 <?php endforeach; ?>
 
-
-
+                <?php if(isset($_SESSION['user'])): ?>
                 <li><a href="?page=favorites"><span class="glyphicon glyphicon-heart"></span> Favorites</a></li>
+                <?php endif; ?>
 
                 <?php if(isset($_SESSION['role'])) : ?>
                     <li><a href="?page=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

@@ -18,7 +18,10 @@
             $paginate = $_REQUEST['paginate'];
         }
         $onPage = 6;
-        $query = "SELECT * FROM news p INNER JOIN favorite f WHERE p.id_news = f.news_id";
+
+        $user_id = $_SESSION['user']->id_user;
+
+        $query = "SELECT * FROM news p INNER JOIN favorite f WHERE p.id_news = f.news_id AND f.user_id = $user_id";
         $resultNumber = $conn->query($query);
         $numRows = $resultNumber->rowCount();
 
@@ -26,10 +29,8 @@
         $numberPaginate = ceil($numRows / $onPage);
 
 
-
         $firstResult = ($paginate-1) * $onPage;
 
-        $user_id = $_SESSION['user']->id_user;
 
         $sql = "SELECT * FROM favorite f INNER JOIN news p ON f.news_id = p.id_news WHERE f.news_id = p.id_news AND f.user_id = $user_id  ORDER BY id_favorite DESC LIMIT ".$firstResult . ','.$onPage;
 

@@ -1,8 +1,8 @@
 <div class="row">
     <?php
-    $q = "SELECT * FROM comment INNER JOIN user ON user_id = id_user WHERE product_id = :id";
+    $q = "SELECT * FROM comment INNER JOIN user ON user_id = id_user WHERE news_id = :id";
     $stmt = $conn->prepare($q);
-    $stmt->bindParam(":id", $idProduct);
+    $stmt->bindParam(":id", $idNews);
 
     try {
         $res = $stmt->execute();
@@ -22,7 +22,7 @@
 
             $commentedTimestamp = $com->created_at;
 
-            $commentedAt = date("H:i:s | d M Y",  $commentedTimestamp);
+            $commentedAt = date("H:i | d M Y",  $commentedTimestamp);
             ?>
 
             <div class="media">
@@ -43,7 +43,7 @@
     <h2>Leave a comment</h2>
     <form method="POST" action="php/comment-insert.php">
         <div class="form-group">
-            <input type="hidden" name="product_id" value="<?= $r->id_product; ?>" />
+            <input type="hidden" name="news_id" value="<?= $r->id_news; ?>" />
             <textarea class="space-bottom-2" placeholder="Type something here..." class="form-control" rows="5" id="comment" name="comment"></textarea>
             <input type="submit" name="send" class="btn btn-lg btn-primary btn-block" id="send" value="Send" />
         </div>

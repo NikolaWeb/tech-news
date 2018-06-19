@@ -1,7 +1,7 @@
 <?php
 
 @session_start();
-include "../connection.inc";
+include "php/connection.php";
 
 if(isset($_POST['send'])){
 

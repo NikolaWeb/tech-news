@@ -4,7 +4,7 @@
     <div class="row">
 		<div class="col-md-4 col-md-offset-4 space-bottom-2 form-signin">
 			
-				<input id="search" type="text" name="search" class="form-control" placeholder="Search newss here..." />
+				<input id="search" type="text" name="search" class="form-control" placeholder="Search news here..." />
 				
 		</div>
 	</div>
@@ -25,7 +25,6 @@
         $numberPaginate = ceil($numRows / $onPage);
 
 
-
         $firstResult = ($paginate-1) * $onPage;
 
         $sql = "SELECT * FROM news ORDER BY id_news DESC LIMIT ".$firstResult . ','.$onPage;
@@ -33,8 +32,10 @@
         $results = $conn->query($sql)->fetchAll();
 		
         foreach($results as $r):
-		
-            $oldprice = $r->price + 30;
+
+            $createdTimestamp = $r->created_at;
+
+            $createdAt = date("H:i | d M Y",  $createdTimestamp);
 		?>
             <div class='col-md-12 space-bottom'>
                 <div class='col-md-6'>
@@ -42,8 +43,10 @@
                 </div>
                 <div class='col-md-6'>
                     <a href='?page=3&news=<?= $r->id_news; ?>'><h4><?= $r->name; ?></h4></a>
-                    <h5><span class='strike-price'>$ <?= $oldprice; ?>"</span> <span class='actual-price'>$ <?= $r->price; ?></span></h5>
+                    <p><small><?= $createdAt ?></small></p>
+                    <?php if(isset($_SESSION['user'])): ?>
                     <button data-id="<?= $r->id_news; ?>" name="addToFavorites" class='btn btn-sm btn-primary atc'><span class="glyphicon glyphicon-heart"></span></button>
+                    <?php endif; ?>
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ $(document).ready(function(){
         $("#paginationWrapper").hide();
         var search = $("#search").val();
 
-        $.post("search.php", {
+        $.post("php/search-ajax.php", {
             search: search
         }, function(data, status){
             $("#searchResults").html(data);
