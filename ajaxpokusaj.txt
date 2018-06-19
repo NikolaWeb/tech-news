@@ -1,0 +1,83 @@
+<div class="container text-center">
+    <h1>Shop</h1>
+	
+    <div class="row">
+		<div class="col-md-4 col-md-offset-4 space-bottom-2 form-signin">
+			
+				<input id="search" type="text" name="search" class="form-control" placeholder="Search products here..." />
+				
+		</div>
+	</div>
+	
+	<div class="row" id="searchResults">
+    <?php
+    if(!isset($_REQUEST['paginate']) || !is_numeric($_REQUEST['paginate'])){
+        $paginate = 1;
+    }
+    else{
+        $paginate = $_REQUEST['paginate'];
+    }
+    $onPage = 6;
+    $query = "SELECT * FROM product";
+    $rez = mysqli_query($conn, $query);
+    if($resultNumber = mysqli_num_rows($rez)){
+        $numberPaginate = ceil($resultNumber / $onPage);
+
+
+
+        $firstResult = ($paginate-1) * $onPage;
+
+        $sql = "SELECT * FROM product ORDER BY id_product DESC LIMIT ".$firstResult . ','.$onPage;
+
+        $rec = mysqli_query($conn, $sql);
+		
+        while($r = mysqli_fetch_array($rec)):
+		
+            $oldprice = $r['price'] + 30;
+		?>
+            <div class='col-sm-4 space-bottom'>
+				<div><a class="image-hover" href='?page=3&course=<?php echo $r['id_product']; ?>'><img class='img-responsive' src='<?php echo $r['image_url']; ?>' alt='<?php echo $r["alt"]; ?>'/></a></div>
+				<a href='index.php?course=<?php echo $r['id_product']; ?>'><h4><?php echo $r['name']; ?></h4></a>
+				<h5><span class='strike-price'>$ <?php echo $oldprice; ?>"</span> <span class='actual-price'>$ <?php echo $r['price']; ?></span></h5>
+				<form class="formData" method="POST">
+				<input type="hidden" class="hidden_id" name="hidden_id"  value="<?php echo $r['id_product']; ?>" />
+				<input type="hidden" class="hidden_image" name="hidden_image"  value="<?php echo $r['image_url']; ?>" />
+				<input type="hidden" class="hidden_price" name="hidden_price" value="<?php echo $r['price']; ?>" />
+				<input type="hidden" class="hidden_name" name="hidden_name"  value="<?php echo $r['name']; ?>" />				
+				<button name="addToCart" class='addToCart btn btn-lg btn-primary btn-block'><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
+				</form>
+            </div>
+<!--
+            $upit2 = "SELECT * FROM kategorije k INNER JOIN vesti_kat vk ON k.id_kategorije = vk.id_kategorije WHERE vk.id_vesti=".$red['id_vesti'];
+            $rez2 = mysqli_query($konekcija, $upit2);
+            $kategorije = array();
+            while($r= mysqli_fetch_array($rez2)){
+                $kategorije[] = $r['naziv_kategorije'];
+
+            }
+            echo "<span class='kategorije'>".implode(', ',$kategorije)."</span>";
+            echo "</div></div>";
+-->
+		<?php
+        endwhile;
+		?>	
+    </div>
+	<div class='row' id="paginationWrapper">
+        <ul class='pagination'>
+	<?php
+        for($str=1; $str<=$numberPaginate; $str++){
+            if($str == $paginate){
+                echo "<li><a class='active-link' href='index.php?page=3&paginate=".$str."'>".$str."</a></li>";
+            }
+            else {
+                echo "<li><a href='index.php?page=3&paginate=" . $str . "'>" . $str . "</a></li>";
+            }
+        }
+	?>
+        <ul>
+	</div>
+	<?php
+    }
+	?>
+               
+</div>
