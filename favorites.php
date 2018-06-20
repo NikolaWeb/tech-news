@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION['user'])){
+        header('Location: index.php');
+    }
+?>
+
 <div class="container text-center">
     <h1>Favorites</h1>
 

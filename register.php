@@ -49,7 +49,7 @@ if(isset($_POST["btnRegister"]))
 	}
 	else{
 		$password = md5(mysqli_real_escape_string($conn, $password));
-		$query = "INSERT INTO user VALUES (NULL, '$fullName', '$password', 2, '$username', '$email')";
+		$query = "INSERT INTO user VALUES (NULL, '$username', '$password', 2, '$fullName', '$email')";
 		if(mysqli_query($conn, $query)){
 			$message = "<span class='text-success'>Registration succesful! Please go to login page to sign in.</span>";
 		}

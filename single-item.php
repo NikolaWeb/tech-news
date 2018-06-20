@@ -16,30 +16,28 @@
             if($resultNumber->rowCount() > 0):
 
             $r = $resultNumber->fetch();
-			
-			$oldprice = $r->price + 30;
+
 			?>
 			
 			<h1><?= $r->name; ?></h1>
 			<div class="col-sm-8">
 				<div class="row">
-					<div class='col-sm-6 space-bottom'>
-						<img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->alt; ?>'/>
+                    <div class='col-sm-12 space-bottom-2 text-left'>
+                        <?= $r->excerpt; ?>
+                    </div>
+					<div class='col-sm-12 space-bottom-2'>
+						<img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->name; ?>'/>
 					</div>
-					<div class='col-sm-6 space-bottom text-left'>
+					<div class='col-sm-12 space-bottom text-left'>
 						<?= $r->description; ?>
 					</div>
-				</div>
-				<div class="row space-bottom">
-					<h4><?= $r->excerpt; ?></h4>
 				</div>
                 <?php include "modules/comments.php"; ?>
 			</div>
 			<div class='col-sm-4'>
 			<div class="well well-lg">
 				<h3><?= $r->name; ?></h3>
-				<h4>One payment of:</h4>				
-				<h5><span class='strike-price'>$ <?= $oldprice; ?>"</span> <span class='actual-price'>$ <?= $r->price; ?></span></h5>
+				<h4>One payment of:</h4>
 				<form action="index.php?page=5&action=add&id=<?= $r->id_news; ?>" method="POST">
 				<input type="hidden" name="hidden_image" value="<?= $r->image_url; ?>" />
 				<input type="hidden" name="hidden_price" value="<?= $r->price; ?>" />

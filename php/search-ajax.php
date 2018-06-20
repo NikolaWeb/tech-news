@@ -12,8 +12,6 @@
 			
 			if($rows->rowCount() > 0) {
                 $results = $rows->fetchAll();
-
-				echo "<h4 id='searchTitle'> Results for the term: <span class='text-primary'>". $search. "</span></h4>";
 				
 				foreach($results as $r):
 

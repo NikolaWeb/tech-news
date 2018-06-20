@@ -1,15 +1,7 @@
 <div class="container">
     <h1 class="text-center">News</h1>
 	
-    <div class="row">
-		<div class="col-md-4 col-md-offset-4 space-bottom-2 form-signin">
-			
-				<input id="search" type="text" name="search" class="form-control" placeholder="Search news here..." />
-				
-		</div>
-	</div>
-	
-	<div class="row" id="searchResults">
+	<div class="row col-md-8" id="searchResults">
     <?php
     if(!isset($_REQUEST['paginate']) || !is_numeric($_REQUEST['paginate'])){
         $paginate = 1;
@@ -37,9 +29,9 @@
 
             $createdAt = date("H:i | d M Y",  $createdTimestamp);
 		?>
-            <div class='col-md-12 space-bottom'>
+            <div class='row space-bottom news-post'>
                 <div class='col-md-6'>
-                    <a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->alt; ?>'/></a>
+                    <a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->name; ?>'/></a>
                 </div>
                 <div class='col-md-6'>
                     <a href='?page=3&news=<?= $r->id_news; ?>'><h4><?= $r->name; ?></h4></a>
@@ -47,13 +39,22 @@
                     <?php if(isset($_SESSION['user'])): ?>
                     <button data-id="<?= $r->id_news; ?>" name="addToFavorites" class='btn btn-sm btn-primary atc'><span class="glyphicon glyphicon-heart"></span></button>
                     <?php endif; ?>
+                    <p class="top10"><?= $r->excerpt; ?></p>
                 </div>
             </div>
 
 		<?php
         endforeach;
-		?>	
+		?>
     </div>
+    <div class='col-md-3 col-md-offset-1 space-bottom sidebar'>
+        <div class="space-bottom-2 form-signin">
+            <h4>Search</h4>
+            <input id="search" type="text" name="search" class="form-control" placeholder="Search news here..." />
+        </div>
+        <hr/>
+    </div>
+    <div class="clearfix"></div>
 	<div class='row text-center' id="paginationWrapper">
         <ul class='pagination'>
 	<?php
