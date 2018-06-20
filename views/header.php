@@ -34,7 +34,7 @@ include "php/setup.php";
                 <?php endif; ?>
 
                 <?php if(isset($_SESSION['role'])) : ?>
-                    <li><a href="?page=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     <?php if ($_SESSION['role'] == "admin"): ?>
                         <li><a href="admin/admin.php"><span class="glyphicon glyphicon-cog"></span> Admin</a></li>
                     <?php

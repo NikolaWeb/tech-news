@@ -81,7 +81,7 @@
 				   
 					<td>$ <?php echo $values["item_price"]; ?></td>  
 					
-					<td><a class="del-item" href="index.php?page=5&action=delete&id=<?php echo $values["id_product"]; ?>"><span class="text-danger">Remove</span></a></td>  
+					<td><a class="del-item" href="../index.php?page=5&action=delete&id=<?php echo $values["><span class="text-danger">Remove</span></a></td>  
 			   </tr>  
 			   <?php  
 						 $total = $total + ($values["item_price"]);  
@@ -155,4 +155,4 @@ $(function() {
   }
 })
 </script>
-<script language="JavaScript" src="admin/scripts.js"></script>
+<script language="JavaScript" src="../admin/scripts.js"></script>

@@ -1,10 +1,5 @@
 <?php
-	$messageFN = "";
-	$messageE = "";
-	$messageU = "";
-	$messageP = "";
-	$messagePA = "";
-	$message = "";
+
 if(isset($_POST["btnRegister"]))
 {
 	$fullName = $_POST["fullName"];
@@ -18,45 +13,56 @@ if(isset($_POST["btnRegister"]))
 	$regUsername = "/^[A-z0-9]{2,30}$/";
 	$regPassword = "/^[A-z0-9]{5,20}$/";
 
+	$errors = [];
 	
 	if(!preg_match($regFullName, $fullName)){
-		$messageFN = "<span class='text-danger'>Your full name is not in a valid format!</span>";
-		
+		array_push($errors, "Your full name is not in a valid format!");
 	}
-	else{
-		$fullName = mysqli_real_escape_string($conn, $fullName);
-	}
+
 	
 	if(!preg_match($regEmail, $email)){
-		$messageE = "<span class='text-danger'>Your email is not in a valid format!</span>";
+        array_push($errors, "Your email is not in a valid format!");
 	}
-	else{
-		$email = mysqli_real_escape_string($conn, $email);
-	}
+
 	
 	if(!preg_match($regUsername, $username)){
-		$messageU = "<span class='text-danger'>Your username is not in a valid format!</span>";
-	}
-	else{
-		$username = mysqli_real_escape_string($conn, $username);
+        array_push($errors, "Your username is not in a valid format!");
 	}
 	
 	if(!preg_match($regPassword, $password)){
-		$messageP = "<span class='text-danger'>Your password is not good enough!</span>";
+        array_push($errors, "Your password is not good enough!");
 	}
 	elseif ($password != $passwordAgain){
-		$messagePA = "<span class='text-danger'>Your password and confirmation password do not match!</span>";
+        array_push($errors, "Your password and confirmation password do not match!");
 	}
 	else{
-		$password = md5(mysqli_real_escape_string($conn, $password));
-		$query = "INSERT INTO user VALUES (NULL, '$username', '$password', 2, '$fullName', '$email')";
-		if(mysqli_query($conn, $query)){
-			$message = "<span class='text-success'>Registration succesful! Please go to login page to sign in.</span>";
-		}
-		else{
-			$message = "<span class='text-danger'>Registration failed!</span>".mysqli_error();
-		}
-	}	
+	    $password = md5($password);
+    }
+
+    if(count($errors) == 0) {
+        try {
+            $query = "INSERT INTO user VALUES (NULL, :username, :password, 2, :fullName, :email)";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":fullName", $fullName);
+            $stmt->bindParam(":email", $email);
+
+            $register = $stmt->execute();
+
+            if ($register) {
+                $_SESSION['success'] = "Registration successful!";
+            } else {
+                array_push($errors, "Registration failed!");
+            }
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    else{
+	    $_SESSION['errors'] = $errors;
+    }
 }
 ?>
 <div class="container text-center">    
@@ -67,31 +73,47 @@ if(isset($_POST["btnRegister"]))
 		<p>
 			<label for="fullName" class="sr-only">Full Name</label>
 			<input id="fullName" name="fullName" class="form-control" placeholder="Full Name" required="" autofocus="" type="text">
-			<?php echo $messageFN; ?>
 		</p>
 		<p>
 			<label for="email" class="sr-only">Email</label>
 			<input id="email" name="email" class="form-control" placeholder="Email (required)" required="" autofocus="" type="text">
-			<?php echo $messageE; ?>
 		</p>
 		<p>
 			<label for="username" class="sr-only">Username</label>
 			<input id="username" name="username" class="form-control" placeholder="Username (required)" required="" autofocus="" type="text">
-			<?php echo $messageU; ?>
 		</p>
 		<p>
 			<label for="password" class="sr-only">Password</label>
 			<input id="password" name="password" class="form-control" placeholder="Password (required)" required="" type="password">
-			<?php echo $messageP; ?>
 		</p>
 		<p>
 			<label for="passwordAgain" class="sr-only">Password again</label>
 			<input id="passwordAgain" name="passwordAgain" class="form-control" placeholder="Password again (required)" required="" type="password">
-			<?php echo $messagePA; ?>
 		</p>
         <button name="btnRegister" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>
-	  <?php echo $message; ?>
 	</div>
+      <?php
+        if(isset($errors)):
+      ?>
+            <ul>
+      <?php
+            foreach($errors as $e):
+      ?>
+                <li><span class="text-danger"><?= $e; ?></span></li>
+      <?php
+            endforeach;
+      ?>
+            </ul>
+      <?php
+        endif;
+        if(isset($_SESSION['success'])):
+       ?>
+            <span class="text-success"><?= $_SESSION['success']; ?></span>
+            <a href="?page=login">Go to login page</a>
+      <?php
+        endif;
+        unset ($_SESSION['success']);
+      ?>
   </div>
 </div>
