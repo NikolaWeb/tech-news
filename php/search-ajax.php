@@ -12,22 +12,29 @@
 			
 			if($rows->rowCount() > 0) {
                 $results = $rows->fetchAll();
-				
-				foreach($results as $r):
 
-?>
-                    <div class='col-md-12 space-bottom'>
+                foreach($results as $r):
+
+                    $createdTimestamp = $r->created_at;
+
+                    $createdAt = date("H:i | d M Y",  $createdTimestamp);
+                    ?>
+                    <div class='row space-bottom news-post'>
                         <div class='col-md-6'>
-                            <a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->alt; ?>'/></a>
+                            <a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->name; ?>'/></a>
                         </div>
                         <div class='col-md-6'>
                             <a href='?page=3&news=<?= $r->id_news; ?>'><h4><?= $r->name; ?></h4></a>
-                            <h5><span class='strike-price'>$ <?= $oldprice; ?>"</span> <span class='actual-price'>$ <?= $r->price; ?></span></h5>
-                            <button data-id="<?= $r->id_news; ?>" name="addToFavorites" class='btn btn-sm btn-primary atc'><span class="glyphicon glyphicon-heart"></span></button>
+                            <p><small><?= $createdAt ?></small></p>
+                            <?php if(isset($_SESSION['user'])): ?>
+                                <button data-id="<?= $r->id_news; ?>" name="addToFavorites" class='btn btn-sm btn-primary atc'><span class="glyphicon glyphicon-heart"></span></button>
+                            <?php endif; ?>
+                            <p class="top10"><?= $r->excerpt; ?></p>
                         </div>
                     </div>
-<?php 
-				endforeach;
+
+                <?php
+                endforeach;
 
 			}
 			else{

@@ -1,4 +1,7 @@
 <?php
+if ($_SESSION['role'] != "admin"){
+    header("Location: ../index.php");
+}
 if(isset($_REQUEST['page'])) {
 ?>
         <div class="col-sm-9">

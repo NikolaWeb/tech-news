@@ -9,7 +9,7 @@
 			
 			$query2 = "UPDATE poll SET result=result+1 WHERE id_poll=".$pollVote;
 			
-			$rez2 = mysqli_query($conn, $query2);
+			$rez2 = $conn->query($query2);
 			if($rez2){
 				$messageSuccess = "<span class='text-success'>Your vote is noted!</span>";
 			}
@@ -21,8 +21,8 @@
 	
 	if(isset($_POST['results'])){
 		$query3 = "SELECT * FROM poll";
-		$res3 = mysqli_query($conn, $query3);
-		while($r3 = mysqli_fetch_array($res3)){
+		$res3 = $conn->query($query3);
+		foreach($res3 as $r3){
 			$results[] = $r3;
 		}
 	}
@@ -34,24 +34,24 @@
 	<div class="well well-lg">
 		<form method="POST" action="">						  
 			<div class="form-group">
-				<h4>Which is your favorite genre?</h4>
+				<h4>Which graphic processor do you own?</h4>
 				
 			</div>
 			<div class="form-group">
 				<?php 
 					$query1 = "SELECT * FROM poll";
-					$res1 = mysqli_query($conn, $query1);
-					while($r1 = mysqli_fetch_array($res1)):
+					$res1 = $conn->query($query1);
+					foreach($res1 as $r1):
 				?>
 					
-					<input id="<?php echo $r1['id_poll']; ?>" value="<?php echo $r1['id_poll']; ?>" type="radio" name="pollVote">
-					<label class="pollLabel" for="<?php echo $r1['id_poll']; ?>"><?php echo $r1['poll_text']; ?></label><br/>
+					<input id="<?php echo $r1->id_poll; ?>" value="<?php echo $r1->id_poll; ?>" type="radio" name="pollVote">
+					<label class="pollLabel" for="<?php echo $r1->id_poll; ?>"><?php echo $r1->poll_text; ?></label><br/>
 				
-				<?php endwhile; ?>
+				<?php endforeach; ?>
 			</div>
 			
 			<div class="form-group">
-			<?php if (isset($_SESSION['role'])): ?>
+			<?php if (isset($_SESSION['user'])): ?>
 				<input name="vote" class="btn btn-success" value="Vote" type="submit">
 			<?php else: ?>
 				 <span class="text-warning">You need to be signed in to vote!</span>
@@ -72,7 +72,7 @@
 							++$i;
 							
 								echo "<tr>";
-								echo "<td>". $result['poll_text'] ."</td><td>". $result['result'] ."</td>";
+								echo "<td>". $result->poll_text ."</td><td>". $result->result ."</td>";
 								echo "</tr>";
 							
 							

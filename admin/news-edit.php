@@ -1,4 +1,7 @@
 <?php
+if ($_SESSION['role'] != "admin"){
+    header("Location: ../index.php");
+}
 if(isset($_REQUEST['page'])&& isset($_REQUEST['item'])) {
     if (is_numeric($_REQUEST['item'])) {
         $item = trim($_REQUEST['item']);
@@ -64,7 +67,7 @@ if(isset($_REQUEST['page'])&& isset($_REQUEST['item'])) {
                         </ul>
                     </div>
                     <?php
-                    unset($_SESSION['success']);
+                    unset($_SESSION['errors']);
                 endif;
                 ?>
             </div>

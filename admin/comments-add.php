@@ -9,25 +9,21 @@ if(isset($_REQUEST['page'])) {
         <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-insert.php' ?>">
 
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="" class="form-control"/>
+                <label for="content">Content</label>
+                <input type="text"  name="content" value="" class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" value="" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label>Role</label>
-                <select class="form-control" name="role">
+                <label>Users</label>
+                <select class="form-control" name="users">
                     <option value="0">Choose...</option>
                     <?php
-                    $q = "SELECT * FROM role";
+                    $q = "SELECT * FROM user";
                     $results = $conn->query($q)->fetchAll();
 
                     foreach ($results as $res):
 
                         ?>
-                        <option value="<?= $res->id_role; ?>"><?= $res->role_name; ?></option>
+                        <option value="<?= $res->id_user; ?>"><?= $res->username; ?></option>
                     <?php
 
                     endforeach;
@@ -35,14 +31,23 @@ if(isset($_REQUEST['page'])) {
                 </select>
             </div>
             <div class="form-group">
-                <label for="fullname">Full name</label>
-                <input type="text" id="fullname" name="fullname" value="" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="" class="form-control"/>
-            </div>
+                <label>News</label>
+                <select class="form-control" name="news">
+                    <option value="0">Choose...</option>
+                    <?php
+                    $q = "SELECT * FROM news";
+                    $results = $conn->query($q)->fetchAll();
 
+                    foreach ($results as $res):
+
+                        ?>
+                        <option value="<?= $res->id_news; ?>"><?= $res->name; ?></option>
+                    <?php
+
+                    endforeach;
+                    ?>
+                </select>
+            </div>
             <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Add"/>
             </div>

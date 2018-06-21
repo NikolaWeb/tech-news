@@ -6,55 +6,61 @@ if(isset($_REQUEST['page'])&& isset($_REQUEST['item'])) {
     if (is_numeric($_REQUEST['item'])) {
         $item = trim($_REQUEST['item']);
 
-        $query = "SELECT * FROM user u INNER JOIN role r ON u.role_id = r.id_role WHERE id_user = $item";
+        $query = "SELECT * FROM comment c INNER JOIN user u ON c.user_id = u.id_user INNER JOIN news n ON c.news_id = n.id_news WHERE id_comment = $item";
         $result = $conn->query($query);
         if ($result->rowCount() == 0) {
             echo "There are no items!";
         } else {
 
             $r = $result->fetch();
-            $role_id = $r->role_id;
+            $user_id = $r->user_id;
+            $news_id = $r->news_id;
             ?>
             <div class="col-sm-9">
 
-                <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-update.php' ?>"
-                      enctype="multipart/form-data">
+                <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-update.php' ?>">
 
-                    <input type="hidden" name="id_user" value="<?= $r->id_user; ?>"/>
+                    <input type="hidden" name="id_comment" value="<?= $r->id_comment; ?>"/>
 
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value="<?= $r->username ?>" class="form-control"/>
+                        <label for="content">Content</label>
+                        <input type="text"  name="content" value="<?= $r->content; ?>" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" value="" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Role</label>
-                        <select class="form-control" name="role">
-                            <option value="<?= $role_id; ?>"><?= $r->role_name; ?></option>
+                        <label>Users</label>
+                        <select class="form-control" name="users">
+                            <option value="<?= $user_id; ?>"><?= $r->username; ?></option>
                             <?php
-                            $q = "SELECT * FROM role";
+                            $q = "SELECT * FROM user";
                             $results = $conn->query($q)->fetchAll();
 
                             foreach ($results as $res):
-                                if ($res->id_role != $role_id):
-                                    ?>
-                                    <option value="<?= $res->id_role; ?>"><?= $res->role_name; ?></option>
-                                <?php
-                                endif;
+
+                                ?>
+                                <option value="<?= $res->id_user; ?>"><?= $res->username; ?></option>
+                            <?php
+
                             endforeach;
                             ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="fullname">Full name</label>
-                        <input type="text" id="fullname" name="fullname" value="<?= $r->full_name; ?>" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="<?= $r->email; ?>" class="form-control"/>
+                        <label>News</label>
+                        <select class="form-control" name="news">
+                            <option value="<?= $news_id; ?>"><?= $r->name; ?></option>
+                            <?php
+                            $q = "SELECT * FROM news";
+                            $results = $conn->query($q)->fetchAll();
+
+                            foreach ($results as $res):
+
+                                ?>
+                                <option value="<?= $res->id_news; ?>"><?= $res->name; ?></option>
+                            <?php
+
+                            endforeach;
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="submit" name="submit" class="edit_item btn btn-lg btn-primary"

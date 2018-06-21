@@ -27,7 +27,7 @@ if(isset($_POST['id'])){
             $added = $stmt->execute();
 
             if ($added) {
-                echo "You did it!";
+                echo "You successfully added it to favorites!";
             }
 
         } catch (PDOException $ex) {

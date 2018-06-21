@@ -17,7 +17,9 @@
 		else{
 			echo ucfirst($_REQUEST['page']) ." -"." Admin Panel";
 		}
-	?>
+
+     ?>
+
   </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +43,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-        <a class="navbar-brand" href="?page=home"><img src="images/logo-st.png" alt="Logo"></a>
+        <a class="navbar-brand" href="admin.php"><img src="images/logo-st.png" alt="Logo"></a>
     </div>
 	 <div class="admin-header">
 		<h3><span class="glyphicon glyphicon-cog"></span> Admin Panel</h3>
@@ -75,6 +77,13 @@
                   <li><a href="?page=users-add">Add new</a></li>
               </ul>
           </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comments <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="?page=comments">Comments</a></li>
+                  <li><a href="?page=comments-add">Add new</a></li>
+              </ul>
+          </li>
 		  <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 		  <li><a href="/novo"><span class="glyphicon glyphicon-arrow-left"></span> Back to Frontend</a></li>
       </ul>
@@ -87,10 +96,6 @@
 		elseif(isset($_REQUEST['page']))
 			if(!is_numeric($_REQUEST['page']))
 				include 'admin/'. ($_REQUEST['page'].".php");
-			elseif($_GET['page'] != $pageinfo['id_menu'])
-			include "404.php";
-			else
-				include 'admin/'. $pageinfo['url'];
 		
 		else
 			include 'admin/'. $pageinfo['url'];

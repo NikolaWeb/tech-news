@@ -23,12 +23,20 @@
 				  </tr>
 				  <tr>
 					<td><strong class="text-success">February 2017 - September 2017</strong></td>
-					<td><h5>Web Developer & Marketing Specialist</h5>
+					<td><h5>Web Developer</h5>
 						<p class="text-warning">GuitarZoom.com</p>
 						<p>My first task was to help launching new version of the website which will increase sales. Furthermore, I worked on improving customer experience which consisted of developing new functions and pleasant visuals according to our customers’ age.</p>
 						<p>The other part was creating/editing campaigns and emails in InfusionSoft (online marketing software)  which we used to reach out to our customers.</p>
 					</td>					
 				  </tr>
+                  <tr>
+                      <td><strong class="text-success">May 2018 - Now</strong></td>
+                      <td><h5>Web Developer & Marketing Specialist</h5>
+                          <p class="text-warning">GuitarZoom.com</p>
+                          <p>Signed 6-month contract as part-time developer.</p>
+                          <p>Tasks consist of setting email campaigns in Infusionsoft, web developing and adding content to the website.</p>
+                      </td>
+                  </tr>
 				</tbody>
 			  </table>
 		</div>

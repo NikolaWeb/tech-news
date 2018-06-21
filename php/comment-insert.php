@@ -1,12 +1,12 @@
 <?php
 
 @session_start();
-include "php/connection.php";
+include "connection.php";
 
 if(isset($_POST['send'])){
 
     $comment = $_POST['comment'];
-    $product_id = $_POST['product_id'];
+    $news_id = $_POST['news_id'];
 
     $errors = [];
 
@@ -21,7 +21,7 @@ if(isset($_POST['send'])){
 
         try{
 
-            $query = "INSERT INTO comment VALUES(NULL, :comment, :user_id, :product_id, :created_at)";
+            $query = "INSERT INTO comment VALUES(NULL, :comment, :user_id, :news_id, :created_at)";
 
             $stmt = $conn->prepare($query);
 
@@ -30,7 +30,7 @@ if(isset($_POST['send'])){
             $user_id = $_SESSION['user']->id_user;
             $stmt->bindParam(":user_id", $user_id);
 
-            $stmt->bindParam(":product_id", $product_id);
+            $stmt->bindParam(":news_id", $news_id);
 
             $created_at = time();
             $stmt->bindParam(":created_at", $created_at);

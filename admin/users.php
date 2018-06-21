@@ -1,3 +1,8 @@
+<?php
+if ($_SESSION['role'] != "admin"){
+    header("Location: ../index.php");
+}
+?>
 <form method="POST" action="">
     <table class="table table-bordered">
         <tr>
