@@ -3,50 +3,55 @@ if(isset($_REQUEST['page'])&& isset($_REQUEST['item'])) {
     if (is_numeric($_REQUEST['item'])) {
         $item = trim($_REQUEST['item']);
 
-        $query = "SELECT * FROM slider s INNER JOIN news n ON news_id = id_news WHERE id_slider = $item";
+        $query = "SELECT * FROM user u INNER JOIN role r ON u.role_id = r.id_role WHERE id_user = $item";
         $result = $conn->query($query);
         if ($result->rowCount() == 0) {
             echo "There are no items!";
         } else {
 
             $r = $result->fetch();
-            $news_id = $r->news_id;
+            $role_id = $r->role_id;
             ?>
             <div class="col-sm-9">
 
                 <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-update.php' ?>"
                       enctype="multipart/form-data">
 
-                    <input type="hidden" name="id_slider" value="<?= $r->id_slider; ?>"/>
+                    <input type="hidden" name="id_user" value="<?= $r->id_user; ?>"/>
 
                     <div class="form-group">
-                        <img src="<?= $r->url; ?>" alt="Responsive image" class="img-responsive img-panel-slider"/>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" value="<?= $r->username ?>" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label for="altTag">Alt</label>
-                        <input type="text" id="altTag" name="alt" value="<?= $r->alt; ?>" class="form-control"/>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" value="" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label class="btn btn-default">
-                            Browse images <input class="myImg" name="slika" id="uploadImage" type="file" hidden>
-                        </label> <span class="text-warning">Recommended size is 880x340px</span>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" name="linked-article">
-                            <option value="<?= $news_id; ?>"><?= $r->name; ?></option>
+                        <label>Role</label>
+                        <select class="form-control" name="role">
+                            <option value="<?= $role_id; ?>"><?= $r->role_name; ?></option>
                             <?php
-                            $q = "SELECT * FROM news";
+                            $q = "SELECT * FROM role";
                             $results = $conn->query($q)->fetchAll();
 
                             foreach ($results as $res):
-                                if ($res->id_news != $news_id):
+                                if ($res->id_role != $role_id):
                                     ?>
-                                    <option value="<?= $res->id_news; ?>"><?= $res->name; ?></option>
+                                    <option value="<?= $res->id_role; ?>"><?= $res->role_name; ?></option>
                                 <?php
                                 endif;
                             endforeach;
                             ?>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Full name</label>
+                        <input type="text" id="fullname" name="fullname" value="<?= $r->full_name; ?>" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="<?= $r->email; ?>" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" name="submit" class="edit_item btn btn-lg btn-primary"

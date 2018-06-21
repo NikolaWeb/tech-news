@@ -44,7 +44,7 @@
         <a class="navbar-brand" href="?page=home"><img src="images/logo-st.png" alt="Logo"></a>
     </div>
 	 <div class="admin-header">
-		<h3>Admin Panel</h3>
+		<h3><span class="glyphicon glyphicon-cog"></span> Admin Panel</h3>
 	 </div>
   </div>
 </nav>
@@ -66,6 +66,13 @@
               <ul class="dropdown-menu">
                   <li><a href="?page=news">News</a></li>
                   <li><a href="?page=news-add">Add new</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="?page=users">Users</a></li>
+                  <li><a href="?page=users-add">Add new</a></li>
               </ul>
           </li>
 		  <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

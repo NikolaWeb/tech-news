@@ -33,7 +33,7 @@ $(document).ready(function(){
                     title: "Removing an item",
                     buttons: {
                         "Ok": function() {
-                           $(".news-post"+id).remove();
+                           $("#news-post"+id).remove();
                             $(this).dialog("close");
                         },
                         "Cancel": function() {

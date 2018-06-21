@@ -18,8 +18,12 @@ $(document).ready(function(){
         e.preventDefault();
         var id = $(this).data('id');
 
+        //makes action dynamic
+        var path = window.location.href;
+        path = path.split('=')[1];
+
         $.ajax({
-            url: "admin/php/slider-delete.php",
+            url: "admin/php/" + path + "-delete.php",
             method: "post",
             data: {
                 id : id
