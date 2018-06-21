@@ -85,7 +85,7 @@
               </ul>
           </li>
 		  <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		  <li><a href="/novo"><span class="glyphicon glyphicon-arrow-left"></span> Back to Frontend</a></li>
+		  <li><a href="index.php"><span class="glyphicon glyphicon-arrow-left"></span> Back to Frontend</a></li>
       </ul>
     </div>
 	<div class="col-sm-9">
@@ -107,10 +107,11 @@
 </div>
 <footer class="container-fluid text-center">
   <div class="collapse navbar-collapse" id="footerNavbar">
-      <ul class="nav navbar-nav">
-			<li><a target="_blank" href="../dokumentacija.pdf">Documentation</a></li>
-			<li><a href="author.php">About author</a></li>
-      </ul>
+		<ul class="nav navbar-nav">
+            <li><a target="_blank" href="dokumentacija.pdf"><span class="glyphicon glyphicon-file"></span> Documentation</a></li>
+            <li><a href="?page=author"><span class="glyphicon glyphicon-user"></span> About author</a></li>
+            <li><a target="_blank" href="https://github.com/NikolaWeb/tech-news"><span class="glyphicon glyphicon-link"></span> Github</a></li>
+        </ul>
 	  <p class="copy">&copy; Nikola Reljic, <?php echo date("Y") ?></p>
     </div>
 </footer>
