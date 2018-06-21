@@ -13,7 +13,7 @@
         $result = $conn->query($q);
         foreach($result as $r):
         ?>
-        <tr id="item-row<?= $r->id_slider ?>">
+        <tr id="item-row<?= $r->id_slider; ?>">
             <td> <?= $r->id_slider; ?> </td>
             <td> <img src="<?= $r->url; ?>" width="130px" alt="<?= $r->alt ?>"/> </td>
             <td> <?= $r->url; ?> </td>

@@ -27,13 +27,13 @@ $(document).ready(function(){
             },
             success: function(data, status, jqXHR) {
 
-
+                var npid = ".new"
 
                 $("<div>Are you sure you want to continue?</div>").dialog({
                     title: "Removing an item",
                     buttons: {
                         "Ok": function() {
-                           $("#news-post"+id).remove();
+                           $(".news-post"+id).remove();
                             $(this).dialog("close");
                         },
                         "Cancel": function() {

@@ -1,4 +1,19 @@
 $(document).ready(function(){
+
+    $("#content").summernote({
+        height: 300,
+        popover: {
+            image: [],
+            link: [],
+            air: []
+        }
+    });
+
+    //disappearing notifications
+    setTimeout(function() {
+        $(".alert-success, .alert-danger").fadeOut().empty();
+    }, 3000);
+
     $(".del-item").on("click",function(e) {
         e.preventDefault();
         var id = $(this).data('id');

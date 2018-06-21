@@ -1,19 +1,9 @@
 <?php
 if(isset($_REQUEST['page'])) {
-
-    $query = "SELECT * FROM slider s INNER JOIN news n ON news_id = id_news";
-    $result = $conn->query($query);
-    if ($result->rowCount() == 0) {
-        echo "There are no items!";
-    } else {
-
-        $r = $result->fetch();
-        $news_id = $r->news_id;
-        ?>
+?>
         <div class="col-sm-9">
 
-            <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-insert.php' ?>"
-                  enctype="multipart/form-data">
+            <form class="order" method="POST" action="<?= 'admin/php/' . $_GET['page'] . '-insert.php' ?>" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="altTag">Alt</label>
@@ -42,7 +32,7 @@ if(isset($_REQUEST['page'])) {
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Confirm editing"/>
+                    <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Add"/>
                 </div>
             </form>
             <?php
@@ -54,17 +44,16 @@ if(isset($_REQUEST['page'])) {
                 unset($_SESSION['success']);
             endif;
             if (isset($_SESSION['errors'])):
-                ?>
-                <div class="alert alert-danger">Neuspesno azuriran slide!</div>
+                foreach((array)$_SESSION['errors'] as $err):
+                    ?>
+                    <div class="alert alert-danger"><?= $err; ?></div>
                 <?php
-                unset($_SESSION['success']);
+                endforeach;
+                unset($_SESSION['errors']);
             endif;
             ?>
         </div>
-        <?php
-
-
-    }
+    <?php
 
 }
 ?>

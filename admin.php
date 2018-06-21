@@ -29,6 +29,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="admin/style.css">
   <link rel="shortcut icon" href="images/favicon.png" />
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 </head>
 <body class="admin-panel">
 
@@ -58,6 +59,13 @@
               <ul class="dropdown-menu">
                   <li><a href="?page=slider">Slider</a></li>
                   <li><a href="?page=slider-add">Add new</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">News <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="?page=news">News</a></li>
+                  <li><a href="?page=news-add">Add new</a></li>
               </ul>
           </li>
 		  <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -99,4 +107,5 @@
 </div>
 </body>
 </html>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script language="JavaScript" src="admin/scripts.js"></script>

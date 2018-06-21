@@ -72,7 +72,7 @@ if(isset($_POST['submit'])){
 
 
     }
-    header('Location: ../../admin.php?page=slider&item=6');
+    header('Location: ../../admin.php?page=slider&item='.$id_slider);
 
 
 }
