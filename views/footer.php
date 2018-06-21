@@ -3,6 +3,7 @@
         <ul class="nav navbar-nav">
             <li><a target="_blank" href="dokumentacija.pdf"><span class="glyphicon glyphicon-file"></span> Documentation</a></li>
             <li><a href="?page=author"><span class="glyphicon glyphicon-user"></span> About author</a></li>
+            <li><a href="?page=author"><span class="glyphicon glyphicon-link"></span> Github</a></li>
         </ul>
         <p class="copy">&copy; Nikola Reljic, <?php echo date("Y") ?></p>
     </div>

@@ -1,4 +1,3 @@
-
 <?php
     //load header
     include("views/header.php");
