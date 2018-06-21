@@ -100,6 +100,9 @@ a{
     right: 0;
     font-size: 18px;
 }
+.admin-panel .dropdown-menu{
+    left: 0;
+}
 /*FOOTER NAVIGATION*/
 #footerNavbar .nav{
 	float: none;
@@ -150,7 +153,7 @@ footer {
     margin-top: 2.5%;
 }
 .active-link{
-    background-color: #259dd7 !important;
+    background-color: #BC322C !important;
     color: #FFF !important;
 }
 .image-hover {
@@ -186,11 +189,8 @@ footer {
 	color: #000000;
 }
 /* ABOUT */
-.about-steve{
-	background: #259DD7;
-	color: #FFF;
-}
-/*SINGLE PRODUCT*/
+
+/*SINGLE NEWS*/
 .pollLabel:hover{
 	cursor: pointer;
 }
@@ -203,6 +203,9 @@ footer {
 }
 textarea{
     min-height: 100px;
+}
+.heart-single{
+    float: right;
 }
 /* CHECKOUT */
 .submit-button {

@@ -15,25 +15,26 @@ $(document).ready(function(){
         });
     });
 
-    $(".del-item").on("click",function(e) {
+    $(".rem-fav").on("click",function(e) {
         e.preventDefault();
         var id = $(this).data('id');
 
         $.ajax({
-            url: "php/cart-remove-ajax.php",
+            url: "php/favorites-delete.php",
             method: "post",
             data: {
                 id : id
             },
             success: function(data, status, jqXHR) {
 
-                console.log(id);
+
 
                 $("<div>Are you sure you want to continue?</div>").dialog({
                     title: "Removing an item",
                     buttons: {
                         "Ok": function() {
-                            window.location = "";
+                           $("#news-post"+id).remove();
+                            $(this).dialog("close");
                         },
                         "Cancel": function() {
                             $(this).dialog("close");

@@ -1,6 +1,6 @@
 <?php
 	@session_start();
-	 include "../setup.php";
+	 include "admin/php/connection.php";
 	 if ($_SESSION['role'] != "admin"){
 		  header("Location: index.php");
 	 }
@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Guitarzoom | 
+  <title>Tech-world |
 	<?php 
 		
 		if(!isset($_REQUEST['page'])){
 			echo "Admin panel";
 		}
 		else{
-			echo ucfirst($_REQUEST['page']) ." Admin Panel";
+			echo ucfirst($_REQUEST['page']) ." -"." Admin Panel";
 		}
 	?>
   </title>
@@ -27,8 +27,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="shortcut icon" href="../images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="admin/style.css">
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 <body class="admin-panel">
 
@@ -40,7 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="?page=home"><img src="../images/GZ-logo.png" alt="Logo"></a>
+        <a class="navbar-brand" href="?page=home"><img src="images/logo-st.png" alt="Logo"></a>
     </div>
 	 <div class="admin-header">
 		<h3>Admin Panel</h3>
@@ -50,37 +50,37 @@
 
 <div class="container-fluid">
   <div class="row content">
-    <div class="col-sm-3 sidenav">
+    <div class="col-sm-2 sidenav">
+
       <ul class="nav nav-pills nav-stacked">
-       	<?php
-			$q = "SELECT * FROM admin_menu";
-			$r = mysqli_query($conn, $q);
-			while($nav = mysqli_fetch_array($r)) : ?>
-
-			<li><a href="?page=<?php echo $nav['slug']; ?>"><?php echo $nav['name'] ?></a></li>
-
-		<?php endwhile; ?>
-		<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		<li><a href="/novo"><span class="glyphicon glyphicon-arrow-left"></span> Back to Frontend</a></li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Slider <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li><a href="?page=slider">Slider</a></li>
+                  <li><a href="?page=slider-add">Add new</a></li>
+              </ul>
+          </li>
+		  <li><a href="php/logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		  <li><a href="/novo"><span class="glyphicon glyphicon-arrow-left"></span> Back to Frontend</a></li>
       </ul>
     </div>
 	<div class="col-sm-9">
 <?php
 	//load content
-		if(isset($_GET['course']))
-			include("single-item.php");
+		if(isset($_GET['item']))
+			include 'admin/'.$_GET['page']."-edit.php";
 		elseif(isset($_REQUEST['page']))
 			if(!is_numeric($_REQUEST['page']))
-				include($_REQUEST['page'].".php");
+				include 'admin/'. ($_REQUEST['page'].".php");
 			elseif($_GET['page'] != $pageinfo['id_menu'])
 			include "404.php";
 			else
-				include $pageinfo['url'];
+				include 'admin/'. $pageinfo['url'];
 		
 		else
-			include $pageinfo['url'];
+			include 'admin/'. $pageinfo['url'];
 		
-	include "../close.php";			
+	include "php/close.php";
 ?>
 	</div>
   </div>
@@ -99,4 +99,4 @@
 </div>
 </body>
 </html>
-<script language="JavaScript" src="scripts.js"></script>
+<script language="JavaScript" src="admin/scripts.js"></script>

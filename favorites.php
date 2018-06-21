@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4 space-bottom-2 form-signin">
 
-            <input id="search" type="text" name="search" class="form-control" placeholder="Search newss here..." />
+            <input id="search" type="text" name="search" class="form-control" placeholder="Search news here..." />
 
         </div>
     </div>
@@ -44,37 +44,33 @@
 
         foreach($results as $r):
 
-            $oldprice = $r->price + 30;
+            $createdTimestamp = $r->created_at;
+
+            $createdAt = date("H:i | d M Y",  $createdTimestamp);
             ?>
-            <div class='col-sm-4 space-bottom'>
-                <div><a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->alt; ?>'/></a></div>
-                <a href='index.php?news="<?= $r->id_news; ?>'><h4><?= $r->name; ?></h4></a>
-                <h5><span class='strike-price'>$ <?= $oldprice; ?>"</span> <span class='actual-price'>$ <?= $r->price; ?></span></h5>
-                <button data-id="<?= $r->id_news; ?>" data-name="<?= $r->name; ?>" data-image="<?= $r->image_url; ?>" data-price="<?= $r->price; ?>" name="addToCart" class='btn btn-lg btn-primary btn-block atc'><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
+            <div class='row space-bottom news-post' id="news-post<?= $r->id_news; ?>">
+                <div class='col-md-6'>
+                    <a class="image-hover" href='?page=3&news=<?= $r->id_news; ?>'><img class='img-responsive' src='<?= $r->image_url; ?>' alt='<?= $r->name; ?>'/></a>
+                </div>
+                <div class='col-md-6'>
+                    <a href='?page=3&news=<?= $r->id_news; ?>'><h4><?= $r->name; ?></h4></a>
+                    <p><small><?= $createdAt ?></small></p>
+                    <?php if(isset($_SESSION['user'])): ?>
+                        <button data-id="<?= $r->id_news; ?>" name="removeFavorites" class='btn btn-sm btn-primary rem-fav'><span class="glyphicon glyphicon-remove"></span></button>
+                    <?php endif; ?>
+                    <p class="top10"><?= $r->excerpt; ?></p>
+                </div>
             </div>
+            <div class="clearfix"></div>
 
         <?php
         endforeach;
         ?>
-    </div>
-    <div class='row' id="paginationWrapper">
-        <ul class='pagination'>
-            <?php
-            for($str=1; $str<=$numberPaginate; $str++){
-                if($str == $paginate){
-                    echo "<li><a class='active-link' href='index.php?page=favorites&paginate=".$str."'>".$str."</a></li>";
-                }
-                else {
-                    echo "<li><a href='index.php?page=favorites&paginate=" . $str . "'>" . $str . "</a></li>";
-                }
-            }
-            ?>
-            <ul>
-    </div>
+
     <?php
     }
     ?>
-
+    </div>
 </div>
-<div id="addedToCart" class="alert alert-info">
+<div id="addedToFav" class="alert alert-info">
 </div>

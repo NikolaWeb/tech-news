@@ -49,7 +49,7 @@ if(isset($_POST['btnLogin']))
 
             $_SESSION['role'] = $role;
             if ($_SESSION['role'] == "admin"){
-                header("Location: admin/admin.php");
+                header("Location: admin.php");
             }
             else{
                 header("Location: index.php");

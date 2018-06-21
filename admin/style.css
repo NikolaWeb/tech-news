@@ -20,11 +20,11 @@
 /*BUTTONS*/
 .btn-primary{
 	color: #fff;
-	background: #259dd7;
+	background: #BC322C;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus {
     color: #fff;
-    background: #138bc5;
+    background: #000;
 }
 .btn-lg {
     font-size: 18px;

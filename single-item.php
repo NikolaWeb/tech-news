@@ -17,12 +17,18 @@
 
             $r = $resultNumber->fetch();
 
+            $createdTimestamp = $r->created_at;
+
+            $createdAt = date("H:i | d M Y",  $createdTimestamp);
+
 			?>
 			
-			<h1><?= $r->name; ?></h1>
+
 			<div class="col-sm-8">
 				<div class="row">
                     <div class='col-sm-12 space-bottom-2 text-left'>
+                        <h1><?= $r->name; ?></h1>
+                        <p><small>Posted at: <?= $createdAt; ?></small></p>
                         <?= $r->excerpt; ?>
                     </div>
 					<div class='col-sm-12 space-bottom-2'>
@@ -34,20 +40,17 @@
 				</div>
                 <?php include "modules/comments.php"; ?>
 			</div>
-			<div class='col-sm-4'>
-			<div class="well well-lg">
-				<h3><?= $r->name; ?></h3>
-				<h4>One payment of:</h4>
-				<form action="index.php?page=5&action=add&id=<?= $r->id_news; ?>" method="POST">
-				<input type="hidden" name="hidden_image" value="<?= $r->image_url; ?>" />
-				<input type="hidden" name="hidden_price" value="<?= $r->price; ?>" />
-				<input type="hidden" name="hidden_name" value="<?= $r->name; ?>" />
-				<button name="addToCart" class='btn btn-lg btn-primary btn-block'><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
-				</form>
-			</div>
-			<?php
-				include "poll.php";
-			?>
+			<div class='col-sm-4 text-left space-top-2'>
+                <div class="well well-lg">
+                    <?php if(isset($_SESSION['user'])): ?>
+                        <span>Add this article to favorites? </span><button data-id="<?= $r->id_news; ?>" name="addToFavorites" class='btn btn-sm btn-primary atc heart-single'><span class="glyphicon glyphicon-heart"></span></button>
+                    <?php else: ?>
+                        <h4>You need to be signed in to use favorites!</h4>
+                    <?php endif; ?>
+                </div>
+                    <?php
+                        include "poll.php";
+                    ?>
 			</div>
 			
 				
@@ -57,4 +60,6 @@
 		}
 	?>
   	
+</div>
+<div id="addedToFav" class="alert alert-info">
 </div>
