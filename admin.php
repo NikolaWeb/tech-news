@@ -43,7 +43,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-        <a class="navbar-brand" href="admin.php"><img src="images/logo-st.png" alt="Logo"></a>
+        <a class="navbar-brand" href="admin.php?page=home"><img src="images/logo-st.png" alt="Logo"></a>
     </div>
 	 <div class="admin-header">
 		<h3><span class="glyphicon glyphicon-cog"></span> Admin Panel</h3>

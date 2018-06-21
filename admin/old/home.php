@@ -1,2 +1,0 @@
-<h1>Hey <span class="text-success"><?php echo $_SESSION['role']; ?></span>, have a great day!</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLLy3BfoQcz1Mnl4h6SHOT44lPmrky9-Rt" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
